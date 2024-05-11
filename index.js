@@ -40,6 +40,15 @@ async function run() {
             res.send(result)
         })
 
+        app.get("/myQueries/:email", async (req, res) => {
+            const result = await queryCollection.find({
+                'userInfo.userEmail': req.params.email
+            }).sort({ _id: -1 }).toArray();
+            res.send(result)
+        })
+
+        
+
 
 
         // Send a ping to confirm a successful connection

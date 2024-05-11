@@ -61,6 +61,25 @@ async function run() {
             res.send(deletedQuery);
         })
 
+        app.put('/recent-queries/:id', async (req, res) => {
+            const id = req.params.id;
+            const filter = { _id: new ObjectId(id) };
+            const options = { upsert: true };
+            const updateQuery = req.body;
+            const upArt = {
+                $set: {
+                    productName: updateQuery.productName,
+                    brandName: updateQuery.brandName,
+                    queryTitle: updateQuery.queryTitle,
+                    productPhoto: updateQuery.productPhoto,
+                    boycottDetails: updateQuery.boycottDetails,
+                    date: updateQuery.date, processing_time: updateQuery.processing_time,
+                }
+            }
+            const result = await queryCollection.updateOne(filter, upArt, options)
+            res.send(result);
+        })
+
 
 
         // Send a ping to confirm a successful connection

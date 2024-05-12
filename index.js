@@ -27,7 +27,10 @@ async function run() {
         // Connect the client to the server	(optional starting in v4.7)
         // await client.connect();
         const queryCollection = client.db('querieDB').collection('querie')
+        const recommendCollection = client.db('querieDB').collection('recommend')
 
+
+        // for query
         app.post("/add-query", async (req, res) => {
             const newQuery = req.body
             const result = await queryCollection.insertOne(newQuery);
@@ -78,6 +81,20 @@ async function run() {
             }
             const result = await queryCollection.updateOne(filter, upArt, options)
             res.send(result);
+        })
+
+        // for recommend
+
+        app.post("/add-recommendation", async (req, res) => {
+            const newRecommend = req.body
+            const result = await recommendCollection.insertOne(newRecommend);
+            res.send(result)
+        })
+
+        app.get("/all-recommendation", async (req, res) => {
+            const cursor = recommendCollection.find().sort({ _id: -1 });
+            const result = await cursor.toArray();
+            res.send(result)
         })
 
 

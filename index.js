@@ -97,6 +97,13 @@ async function run() {
             res.send(result)
         })
 
+        app.get("/myRecommendation/:email", async (req, res) => {
+            const result = await recommendCollection.find({
+                recommenderEmail: req.params.email
+            }).sort({ _id: -1 }).toArray();
+            res.send(result)
+        })
+
 
 
         // Send a ping to confirm a successful connection

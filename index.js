@@ -8,7 +8,9 @@ const port = process.env.PORT || 5000;
 // middleware
 app.use(cors({
     origin: [
-        'https://smart-tech-project.web.app'
+        'https://smart-tech-project.web.app',
+        'http://localhost:5173',
+        'https://vercel.com/kawsers-projects-01660197/smart-tech-spot-server/6rn3XYfJJxbZVNWoHed4qo6iSb94'
     ]
 }));
 app.use(express.json())

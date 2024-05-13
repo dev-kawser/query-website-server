@@ -6,7 +6,11 @@ const app = express();
 const port = process.env.PORT || 5000;
 
 // middleware
-app.use(cors());
+app.use(cors({
+    origin: [
+        'https://smart-tech-project.web.app'
+    ]
+}));
 app.use(express.json())
 
 

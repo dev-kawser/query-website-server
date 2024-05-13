@@ -9,6 +9,7 @@ const port = process.env.PORT || 5000;
 app.use(cors({
     origin: [
         'http://localhost:5174',
+        'http://localhost:5173',
         'https://smart-tech-project.web.app',
         'https://vercel.com/kawsers-projects-01660197/smart-tech-spot-server/6rn3XYfJJxbZVNWoHed4qo6iSb94'
     ]
@@ -34,7 +35,6 @@ async function run() {
         // await client.connect();
         const queryCollection = client.db('querieDB').collection('querie')
         const recommendCollection = client.db('querieDB').collection('recommend')
-
 
         // for query
         app.post("/add-query", async (req, res) => {

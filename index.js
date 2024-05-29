@@ -35,6 +35,22 @@ async function run() {
         // await client.connect();
         const queryCollection = client.db('querieDB').collection('querie')
         const recommendCollection = client.db('querieDB').collection('recommend')
+        const reviewsCollection = client.db('querieDB').collection('reviews')
+
+        // for reviews
+
+        app.post("/reviews", async (req, res) => {
+            const review = req.body;
+            const result = await reviewsCollection.insertOne(review);
+            res.send(result)
+        })
+
+        app.get('/reviews', async (req, res) => {
+            const cursor = reviewsCollection.find().sort({ _id: -1 });
+            const result = await cursor.toArray();
+            res.send(result);
+        })
+
 
         // for query
         app.post("/add-query", async (req, res) => {
